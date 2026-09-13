@@ -120,28 +120,32 @@ builder.Services.AddSwaggerGen(c =>
 var app = builder.Build();
 
 // -------------------------------------------------------------
-// Database Migration and Seeding on Startup
+// Database Migration and Seeding on Startup (Non-blocking background task)
 // -------------------------------------------------------------
-using (var scope = app.Services.CreateScope())
+_ = Task.Run(async () =>
 {
+    // Brief delay to allow Kestrel to bind port and accept /health requests immediately
+    await Task.Delay(1500);
+    using var scope = app.Services.CreateScope();
     var services = scope.ServiceProvider;
     var logger = services.GetRequiredService<ILogger<Program>>();
     try
     {
         var context = services.GetRequiredService<AppDbContext>();
-        // Ensure database exists
+        logger.LogInformation("Checking database schema and connectivity...");
         await context.Database.EnsureCreatedAsync();
 
         var seeder = services.GetRequiredService<DataSeeder>();
         var adminEmail = builder.Configuration["Admin:Email"];
         var adminPass = builder.Configuration["Admin:Password"];
         await seeder.SeedAsync(adminEmail, adminPass);
+        logger.LogInformation("Database seeded successfully on startup.");
     }
     catch (Exception ex)
     {
-        logger.LogWarning(ex, "Could not automatically migrate or seed database on startup (MySQL may be offline in dev mode).");
+        logger.LogWarning(ex, "Could not automatically migrate or seed database on startup (MySQL may still be initializing).");
     }
-}
+});
 
 // -------------------------------------------------------------
 // Middleware Pipeline
