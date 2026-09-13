@@ -1,0 +1,105 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: kgoriwayra_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_password_secret}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-kgoriwayra}
+      MYSQL_USER: ${MYSQL_USER:-kgoriwayra_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-user_password_secret}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      - kgoriwayra_network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: ../docker/api.Dockerfile
+    container_name: kgoriwayra_api
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: Server=mysql;Port=3306;Database=${MYSQL_DATABASE:-kgoriwayra};User=${MYSQL_USER:-kgoriwayra_user};Password=${MYSQL_PASSWORD:-user_password_secret};
+      Jwt__Secret: ${Jwt__Secret}
+      Jwt__Issuer: ${Jwt__Issuer:-api.cabalgataskgoriwayra.com}
+      Jwt__Audience: ${Jwt__Audience:-cabalgataskgoriwayra.com}
+      Jwt__AccessTokenExpirationMinutes: ${Jwt__AccessTokenExpirationMinutes:-60}
+      Jwt__RefreshTokenExpirationDays: ${Jwt__RefreshTokenExpirationDays:-7}
+      Admin__Username: ${Admin__Username:-admin}
+      Admin__Email: ${Admin__Email:-admin@cabalgataskgoriwayra.com}
+      Admin__Password: ${Admin__Password}
+      Smtp__Host: ${Smtp__Host}
+      Smtp__Port: ${Smtp__Port:-587}
+      Smtp__User: ${Smtp__User}
+      Smtp__Password: ${Smtp__Password}
+      Smtp__FromEmail: ${Smtp__FromEmail:-reservas@cabalgataskgoriwayra.com}
+      Smtp__FromName: ${Smtp__FromName:-Cabalgatas Kgoriwayra}
+      Cors__AllowedOrigins: ${Cors__AllowedOrigins:-https://cabalgataskgoriwayra.com,https://www.cabalgataskgoriwayra.com}
+      Upload__Path: /app/uploads
+    volumes:
+      - uploads_data:/app/uploads
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    networks:
+      - kgoriwayra_network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../docker/frontend.Dockerfile
+      args:
+        API_URL: ${API_URL:-https://api.cabalgataskgoriwayra.com}
+    container_name: kgoriwayra_frontend
+    restart: always
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/healthz"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    networks:
+      - kgoriwayra_network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+
+volumes:
+  mysql_data:
+    driver: local
+  uploads_data:
+    driver: local
+
+networks:
+  kgoriwayra_network:
+    driver: bridge

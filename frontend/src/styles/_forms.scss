@@ -1,0 +1,77 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.form-group {
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: $color-dark;
+    margin-bottom: 0.45rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+
+    .required {
+      color: $color-error;
+    }
+  }
+
+  .form-control {
+    width: 100%;
+    font-family: $font-body;
+    font-size: 0.95rem;
+    padding: 0.85rem 1.1rem;
+    border-radius: $radius-md;
+    border: 1px solid rgba($color-dark, 0.18);
+    background: $color-white;
+    color: $color-text-main;
+    transition: all $transition-fast;
+    outline: none;
+
+    &::placeholder {
+      color: $color-text-light;
+    }
+
+    &:focus {
+      border-color: $color-primary;
+      box-shadow: 0 0 0 4px rgba($color-primary, 0.12);
+    }
+
+    &.is-invalid {
+      border-color: $color-error;
+      background-color: #FFF9F9;
+
+      &:focus {
+        box-shadow: 0 0 0 4px rgba(211, 47, 47, 0.15);
+      }
+    }
+  }
+
+  textarea.form-control {
+    min-height: 110px;
+    resize: vertical;
+  }
+
+  select.form-control {
+    cursor: pointer;
+  }
+
+  .error-feedback {
+    font-size: 0.8rem;
+    color: $color-error;
+    margin-top: 0.35rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .form-hint {
+    font-size: 0.8rem;
+    color: $color-text-muted;
+    margin-top: 0.3rem;
+  }
+}

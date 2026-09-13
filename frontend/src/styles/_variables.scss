@@ -1,0 +1,88 @@
+// ==============================================================================
+// Cabalgatas Kgoriwayra — Design System Variables
+// ==============================================================================
+
+// --- Colores Principales (Inspiración Ecuestre y Cuero Tradicional del Colca) ---
+$color-primary: #3D2314;         // Cuero Montura / Marrón Ecuestre Principal
+$color-primary-dark: #24140B;    // Caoba Oscuro / Cuero Envejecido
+$color-primary-light: #5E3821;   // Castaño Cálido
+$color-primary-rgb: 61, 35, 20;
+
+$color-secondary: #A45222;       // Terracota Andina / Coñac Montura
+$color-secondary-dark: #823C13;
+$color-secondary-light: #C26B35;
+$color-secondary-rgb: 164, 82, 34;
+
+$color-accent: #D19434;          // Oro Inti / Hebilla de Bronce / Acento
+$color-accent-light: #E8B665;
+$color-accent-dark: #A8711E;
+
+$color-forest: #2B3A26;          // Verde Pino Andino / Quebrada
+$color-forest-light: #3E5437;
+
+$color-dark: #1C1008;            // Silla de Montar Negra / Café Profundo
+$color-dark-surface: #28180E;
+$color-dark-rgb: 28, 16, 8;
+
+$color-sand: #FAF6EE;            // Pergamino / Cuero Crudo / Crema Sillar
+$color-sand-light: #FDFBF7;
+$color-sand-dark: #ECE3D2;
+
+$color-white: #FFFFFF;
+
+// --- Colores de Texto ---
+$color-text-main: #2C1B12;
+$color-text-muted: #6B5547;
+$color-text-light: #9C8577;
+$color-text-inverse: #FFFFFF;
+
+// --- Estados & Alertas ---
+$color-success: #2E7D32;
+$color-warning: #ED6C02;
+$color-error: #D32F2F;
+$color-info: #0288D1;
+$color-whatsapp: #25D366;
+$color-whatsapp-dark: #128C7E;
+
+// --- Tipografía ---
+$font-heading: 'Playfair Display', Georgia, serif;
+$font-script: 'Great Vibes', cursive;
+$font-body: 'Poppins', 'Inter', -apple-system, sans-serif;
+$font-display: 'Outfit', -apple-system, sans-serif;
+
+// --- Espaciados ---
+$spacing-xxs: 0.25rem;  // 4px
+$spacing-xs:  0.5rem;   // 8px
+$spacing-sm:  0.75rem;  // 12px
+$spacing-md:  1rem;     // 16px
+$spacing-lg:  1.5rem;   // 24px
+$spacing-xl:  2rem;     // 32px
+$spacing-2xl: 3rem;     // 48px
+$spacing-3xl: 4rem;     // 64px
+$spacing-4xl: 6rem;     // 96px
+
+// --- Bordes & Radios ---
+$radius-xs: 4px;
+$radius-sm: 8px;
+$radius-md: 14px;
+$radius-lg: 22px;
+$radius-full: 9999px;
+
+// --- Sombras ---
+$shadow-sm: 0 2px 8px rgba(27, 58, 75, 0.06);
+$shadow-md: 0 8px 24px rgba(27, 58, 75, 0.08);
+$shadow-lg: 0 16px 40px rgba(27, 58, 75, 0.12);
+$shadow-card: 0 10px 30px rgba(27, 58, 75, 0.07);
+$shadow-card-hover: 0 20px 45px rgba(194, 98, 45, 0.18);
+
+// --- Transiciones ---
+$transition-fast: 0.15s ease-out;
+$transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+// --- Breakpoints ---
+$bp-sm: 640px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+$bp-2xl: 1440px;

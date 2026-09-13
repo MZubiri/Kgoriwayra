@@ -1,0 +1,162 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.card-tour {
+  background: $color-white;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  box-shadow: $shadow-card;
+  transition: all $transition-smooth;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid rgba(27, 58, 75, 0.06);
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: $shadow-card-hover;
+
+    .card-tour-image img {
+      transform: scale(1.06);
+    }
+  }
+
+  .card-tour-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: $color-sand-dark;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform $transition-smooth;
+    }
+
+    .badge-location {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(27, 58, 75, 0.75);
+      backdrop-filter: blur(8px);
+      color: $color-white;
+      padding: 0.35rem 0.8rem;
+      border-radius: $radius-full;
+      font-size: 0.8rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .badge-featured {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: $color-accent;
+      color: $color-dark;
+      padding: 0.35rem 0.8rem;
+      border-radius: $radius-full;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+  }
+
+  .card-tour-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    .tour-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: $color-text-muted;
+      margin-bottom: 0.8rem;
+
+      span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+    }
+
+    .tour-title {
+      font-family: $font-heading;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: $color-dark;
+      line-height: 1.3;
+      margin-bottom: 0.6rem;
+      transition: color $transition-fast;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+
+    .tour-desc {
+      font-size: 0.92rem;
+      color: $color-text-muted;
+      line-height: 1.55;
+      margin-bottom: 1.2rem;
+      @include line-clamp(2);
+    }
+
+    .card-tour-footer {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(27, 58, 75, 0.08);
+      @include flex-between;
+
+      .tour-price {
+        display: flex;
+        flex-direction: column;
+
+        .price-label {
+          font-size: 0.75rem;
+          text-transform: uppercase;
+          color: $color-text-light;
+          letter-spacing: 0.5px;
+        }
+
+        .price-value {
+          font-family: $font-display;
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: $color-primary-dark;
+        }
+      }
+    }
+  }
+}
+
+// Badge generic
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: $radius-full;
+  font-size: 0.8rem;
+  font-weight: 600;
+
+  &.badge-easy {
+    background: #E8F8EE;
+    color: #27AE60;
+  }
+  &.badge-moderate {
+    background: #FFF3E0;
+    color: #E67E22;
+  }
+  &.badge-difficult {
+    background: #FDEDEB;
+    color: #C0392B;
+  }
+}
