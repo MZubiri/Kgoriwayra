@@ -39,18 +39,18 @@ services:
       ASPNETCORE_URLS: http://+:8080
       DatabaseProvider: MySql
       ConnectionStrings__DefaultConnection: Server=mysql;Port=3306;Database=${MYSQL_DATABASE:-kgoriwayra};User=${MYSQL_USER:-kgoriwayra_user};Password=${MYSQL_PASSWORD:-user_password_secret};AllowPublicKeyRetrieval=True;SslMode=None;
-      Jwt__Secret: ${Jwt__Secret}
+      Jwt__Secret: ${Jwt__Secret:-Kgoriwayra_Colca_SuperSecret_Jwt_EncryptionKey_987654321_ABCXYZ}
       Jwt__Issuer: ${Jwt__Issuer:-api.cabalgataskgoriwayra.com}
       Jwt__Audience: ${Jwt__Audience:-cabalgataskgoriwayra.com}
       Jwt__AccessTokenExpirationMinutes: ${Jwt__AccessTokenExpirationMinutes:-60}
       Jwt__RefreshTokenExpirationDays: ${Jwt__RefreshTokenExpirationDays:-7}
       Admin__Username: ${Admin__Username:-admin}
       Admin__Email: ${Admin__Email:-admin@cabalgataskgoriwayra.com}
-      Admin__Password: ${Admin__Password}
-      Smtp__Host: ${Smtp__Host}
+      Admin__Password: ${Admin__Password:-Admin123!*Colca}
+      Smtp__Host: ${Smtp__Host:-smtp.gmail.com}
       Smtp__Port: ${Smtp__Port:-587}
-      Smtp__User: ${Smtp__User}
-      Smtp__Password: ${Smtp__Password}
+      Smtp__User: ${Smtp__User:-noreply@cabalgataskgoriwayra.com}
+      Smtp__Password: ${Smtp__Password:-smtp_placeholder_pass}
       Smtp__FromEmail: ${Smtp__FromEmail:-reservas@cabalgataskgoriwayra.com}
       Smtp__FromName: ${Smtp__FromName:-Cabalgatas Kgoriwayra}
       Cors__AllowedOrigins: ${Cors__AllowedOrigins:-https://cabalgataskgoriwayra.com,https://www.cabalgataskgoriwayra.com}

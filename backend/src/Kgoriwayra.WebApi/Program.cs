@@ -37,7 +37,10 @@ else
 builder.Services.AddScoped<DataSeeder>();
 
 // 2. JWT Authentication
-var jwtSecret = builder.Configuration["Jwt:Secret"] ?? "Kgoriwayra_Colca_SuperSecret_Jwt_EncryptionKey_987654321_ABCXYZ";
+var rawJwtSecret = builder.Configuration["Jwt:Secret"];
+var jwtSecret = string.IsNullOrWhiteSpace(rawJwtSecret) || rawJwtSecret.Length < 32
+    ? "Kgoriwayra_Colca_SuperSecret_Jwt_EncryptionKey_987654321_ABCXYZ"
+    : rawJwtSecret;
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -167,7 +170,7 @@ app.UseCors("DefaultCorsPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapHealthChecks("/health");
+app.MapHealthChecks("/health").AllowAnonymous();
 app.MapControllers();
 
 app.Run();
