@@ -16,7 +16,7 @@ FROM nginx:alpine AS final
 # Install curl for docker healthcheck
 RUN apk add --no-cache curl
 
-# Copy custom Nginx configuration
+# Copy custom Nginx configuration from local context
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy build artifacts to nginx public html
