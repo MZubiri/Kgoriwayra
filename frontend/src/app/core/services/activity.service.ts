@@ -20,7 +20,7 @@ export interface ActivityItem {
 export class ActivityService {
   private readonly http = inject(HttpClient);
   private readonly langService = inject(LanguageService);
-  private readonly apiUrl = 'http://localhost:8080/api/activities';
+  private readonly apiUrl = '/api/activities';
 
   private readonly fallbackEs: ActivityItem[] = [
     { id: '1', slug: 'trekking', title: 'Trekking por el Cañón', shortDescription: 'Caminatas guiadas por senderos andinos ancestrales y miradores profundos.', icon: '🥾', badge: 'Senderismo' },

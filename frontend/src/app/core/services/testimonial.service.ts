@@ -21,7 +21,7 @@ export interface CustomerReview {
 export class TestimonialService {
   private readonly http = inject(HttpClient);
   private readonly langService = inject(LanguageService);
-  private readonly apiUrl = 'http://localhost:8080/api/testimonials';
+  private readonly apiUrl = '/api/testimonials';
 
   // Testimonios Reales Verificados de cabalgataskgoriwayra.com
   private readonly fallbackEs: CustomerReview[] = [

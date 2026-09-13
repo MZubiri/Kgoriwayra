@@ -11,7 +11,7 @@ import { LanguageService } from './language.service';
 export class BookingService {
   private readonly http = inject(HttpClient);
   private readonly langService = inject(LanguageService);
-  private readonly apiUrl = 'http://localhost:8080/api/bookings';
+  private readonly apiUrl = '/api/bookings';
 
   createBooking(request: CreateBookingRequest): Observable<ApiResponse<BookingConfirmationResponse>> {
     const lang = this.langService.currentLang();

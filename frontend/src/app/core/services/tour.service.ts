@@ -12,7 +12,7 @@ import { LanguageService } from './language.service';
 export class TourService {
   private readonly http = inject(HttpClient);
   private readonly langService = inject(LanguageService);
-  private readonly apiUrl = 'http://localhost:8080/api/tours';
+  private readonly apiUrl = '/api/tours';
 
   // 12 Circuitos Oficiales de Cabalgatas Kgoriwayra
   private readonly fallbackToursEs: TourSummary[] = [
